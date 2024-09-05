@@ -49,34 +49,49 @@ text.innerHTML = text.innerHTML.split("").map((char,i) =>
 ).join("");
 
 
-// Circle Skill
+// Select the skills section
+const skillsSection = document.querySelector('.skills');
 let circles = document.querySelectorAll('.circle');
 
-circles.forEach(element => {
-    
-    let dots = element.getAttribute("data-dots");
-    let marked = element.getAttribute("data-percent");
-    let percent = Math.floor(dots * marked / 100);
-    let points = "";
-    let rotate = 360/dots;
+// Function to animate the circle skills
+function animateCircles() {
+    circles.forEach(element => {
+        let dots = element.getAttribute("data-dots");
+        let marked = element.getAttribute("data-percent");
+        let percent = Math.floor(dots * marked / 100);
+        let points = "";
+        let rotate = 360 / dots;
 
-    for (let i = 0; i < dots; i++) {
+        for (let i = 0; i < dots; i++) {
+            points += `<div class="points" style="--i:${i}; --rot:${rotate}deg"></div>`;
+        }
 
-        points += `<div class="points" style="--i:${i}; --rot:${rotate}deg"></div>`;
-                
-    }
+        element.innerHTML = points;
 
-    element.innerHTML = points;
-    
-    const pointsMarked = element.querySelectorAll('.points');
+        const pointsMarked = element.querySelectorAll('.points');
+        for (let i = 0; i < percent; i++) {
+            pointsMarked[i].classList.add('marked');
+        }
+    });
+}
 
-    for (let i = 0; i < percent; i++) {
-
-        pointsMarked[i].classList.add('marked');
-        
-    }
-    
+// Intersection Observer to trigger animations on scroll
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Trigger the bar and circle animations
+            animateCircles();
+            entry.target.classList.add('animate');
+            observer.unobserve(entry.target); // Stop observing after triggering
+        }
+    });
+}, {
+    threshold: 0.2 // Trigger when 20% of the section is visible
 });
+
+// Start observing the skills section
+observer.observe(skillsSection);
+
 
 
 // Portfolio Item Filter
@@ -224,3 +239,27 @@ scrollBtn.addEventListener("click", () => {
 
 });
 
+
+// Send Contact Form Data to Gmail
+// (function(){
+
+//     emailjs.init("jI5xYLyGItRr178Ku");
+
+// })();
+
+// document.getElementById('contact-form').addEventListener('submit', function(event) 
+// {
+//     event.preventDefault(); // Prevent default form submission
+
+//     emailjs.sendForm('service_noa6qjj', 'template_2wctr3v', this)
+
+//     .then(function(response) {
+
+//         alert('Message sent successfully!');
+
+//     }, function(error) {
+
+//         alert('Failed to send message. Please try again later.'); 
+        
+//     });
+// });

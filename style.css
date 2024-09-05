@@ -936,36 +936,33 @@ body{
     position: relative;
 }
 
-.skills .skills-contan .left .skill-bar .bar span{
+.skills .skills-contan .left .skill-bar .bar span {
+    transition: width 2s;
     height: 100%;
     position: absolute;
     left: 0;
     background-color: var(--main-color);
     box-shadow: var(--hover-box-shadow);
     border-radius: 25px;
+    width: 0; /* Start at 0 */
 }
 
-.skills .skills-contan .left .skill-bar .bar .html{
+.skills.animate .skills-contan .left .skill-bar .bar .html {
     width: 90%;
-    animation: html 2s;
 }
 
-.skills .skills-contan .left .skill-bar .bar .css{
+.skills.animate .skills-contan .left .skill-bar .bar .css {
     width: 72%;
-    animation: css 3s;
-
 }
 
-.skills .skills-contan .left .skill-bar .bar .figma{
-    width: 80%;
-    animation: figma 4s;
-
-}
-
-.skills .skills-contan .left .skill-bar .bar .javascript{
+.skills.animate .skills-contan .left .skill-bar .bar .figma {
     width: 85%;
-    animation: javascript 5s;
 }
+
+.skills.animate .skills-contan .left .skill-bar .bar .javascript {
+    width: 80%;
+}
+
 
 .right .prof{
     display: grid;
